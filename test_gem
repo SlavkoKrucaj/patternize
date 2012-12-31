@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+gem uninstall patternize
+rm patternize-0.0.1.gem
+gem build patternize.gemspec
+gem install patternize-0.0.1.gem
