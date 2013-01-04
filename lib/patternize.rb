@@ -18,9 +18,10 @@ class Patternize < Thor
   end
   
   desc 'start [PROJECT_NAME]', 'create project from template'
+  method_option :repo
   def start(project_name = "")
     
-    Templatizer.new(project_name).create_project
+    Templatizer.new(project_name, options[:repo]).create_project
     system "open ./#{project_name}/#{project_name}.xcodeproj"
 
   end

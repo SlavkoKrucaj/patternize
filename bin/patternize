@@ -5,16 +5,13 @@ $:.unshift File.join(PATTERNIZE_ROOT, 'lib')
 require "rubygems"
 require "bundler/setup"
 
-# gems and libraries
 require 'thor'
 require 'fileutils'
 require 'erb'
 
-# local classes
 require 'patternize'
 require 'pattern'
 require 'singleton'
-require 'templatizer'
+require 'templatizercd'
 
-# run Patternizer with thor
 Patternize.start

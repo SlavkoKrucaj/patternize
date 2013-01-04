@@ -1,19 +1,19 @@
 class Templatizer < Thor
   include Thor::Actions
   
-  attr_accessor :project_name, :pattern_to_replace
+  attr_accessor :project_name, :pattern_to_replace, :github_repo
 
   no_tasks {
 
-    def initialize(project_name = "TemplateProject")
+    def initialize(project_name = "TemplateProject", github_repo = "")
       @project_name = project_name
+      @github_repo = github_repo
       @pattern_to_replace = '@project_name'
     end
   
     def create_project
       
       system "git clone https://github.com/SlavkoKrucaj/TemplateProject " + @project_name
-      system "rm -rf ./" + @project_name + "/.git"
       
       Dir.glob("./" + @project_name + "/**/*").reverse.select {|p| p.include? @pattern_to_replace}.each do |path|
              
@@ -27,16 +27,21 @@ class Templatizer < Thor
            File.open(new_path, "w+") { |file| file.write(template) }
         end
       end
-    
-      # Dir.glob("./**/*").select {|f| !File.directory? f}.each do |f|
-      # 
-      #   new_file_name = f.gsub('@project_name', @project_name)
-      #   
-      #   FileUtils.mkdir_p(File.dirname(new_file_name))
-      # 
-
-      # 
-      # end    
+      
+      say "Pushing to GitHub repo == #{@github_repo}"
+      
+      if (@github_repo.empty?)
+        system "rm -rf ./" + @project_name + "/.git"
+      else
+        Dir.chdir @project_name
+        system "pwd"
+        system "git remote set-url origin " + @github_repo
+        system "git add -A ."
+        system 'git commit -m "Initial commit"'
+        system 'git push origin master'
+        Dir.chdir ".."
+      end
+  
     end
   }
   

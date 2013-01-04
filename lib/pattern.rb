@@ -25,9 +25,5 @@ class Pattern
 
     end
   end
-  
-  def create_folder_structure
-    # Dir.glob('./work/personal_projects/learning_ruby/patternize/templates/folder/**/*').select {|f| File.directory? f}.each {|f| puts f}
-    # puts "creating folder structure"
-  end
+
 end
