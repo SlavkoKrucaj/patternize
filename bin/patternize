@@ -12,6 +12,6 @@ require 'erb'
 require 'patternize'
 require 'pattern'
 require 'singleton'
-require 'templatizercd'
+require 'templatizer'
 
 Patternize.start
