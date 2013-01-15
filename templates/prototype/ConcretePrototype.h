@@ -1,5 +1,9 @@
 //
-//  Prototype implementation. Created by patternizer.
+//  ConcretePrototype.h
+//  <%= @project_name %>
+//
+//  Created by <%= @author %> on <%= @date %>
+//  Copyright (c) <%= @date %>. <%= @company %>. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

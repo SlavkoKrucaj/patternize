@@ -1,5 +1,6 @@
 class Pattern
   attr_accessor :pattern_name, :flat, :origin
+  attr_accessor :project_name, :author, :company
   
   def initialize(pattern_name, pattern_origin, flat = true)
     
@@ -12,7 +13,18 @@ class Pattern
     @flat = flat
     @origin = "#{PATTERNIZE_ROOT}/templates/#{pattern_origin}"
     
-    self.create_folder_structure if flat
+    options_file = File.read "#{Dir.home}/.patternize"
+    if options_file
+      options = YAML::load( options_file )
+
+      @project_name = options[:project]
+      @author = options[:author]
+      @company = options[:company]
+    else
+      @project_name = "Project"
+      @author = "Author"
+      @company = "Company"
+    end
   end
 
   def process
